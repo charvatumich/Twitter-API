@@ -29,10 +29,13 @@ CITATIONS:
 """
 print("START*******")
 import nltk
+import random
 from nltk.book import *
 
 tokens = text2[:150] # Requirement 1
-print(tokens) # Deliverable 1
+print('\nCHALLENGE A\n---------------------------------------------------------------------\n')
+print('***DELIVERABLE A***\n')
+print(tokens, '\n') # Deliverable 1
 
 """
 CODE RESULTS IN SAME VALUE AS SAMPLE ABOVE
@@ -43,5 +46,30 @@ tokens = nltk.word_tokenize(sample_s)
 print(tokens)
 ---------------------------------------------------------------------
 """
+
+print('***DELIVERABLE B***\n') #(1)
+
+tagged_tokens = nltk.pos_tag(tokens)
+tagmap = {"NN":"a noun","NNS":"a plural noun","VB":"a verb","JJ":"an adjective","NNP":"a proper noun"}
+substitution_probabilities = {"NN":.15,"NNS":.1,"VB":.1,"JJ":.1, "NNP":.1}
+
+def spaced(word):
+	if word in [",", ".", "?", "!", ":"]:
+		return word
+	else:
+		return " " + word
+
+final_words = []
+
+
+for (word, tag) in tagged_tokens:
+	if tag not in substitution_probabilities or random.random() > substitution_probabilities[tag]:
+		final_words.append(spaced(word))
+	else:
+		new_word = input("Please enter %s:\n" % (tagmap[tag]))
+		final_words.append(spaced(new_word))
+
+print('\n')
+print("".join(final_words))
 
 print("\n\nEND*******")
