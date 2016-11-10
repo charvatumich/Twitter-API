@@ -37,4 +37,6 @@ base_url = 'https://www.si.umich.edu/programs/bachelor-science-information/bsi-a
 r = requests.get(base_url)
 soup = BeautifulSoup(r.text, "lxml")
 clean = soup.prettify()
-print(clean)
+rep1 = clean.replace('student', 'AMAZING student')
+
+
